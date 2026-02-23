@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studybeacon | Focus & Productivity</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100..900&family=Spline+Sans:wght@300..700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #ffffff;
+            --text: #000000;
+            --accent: #276EF1; /* Uber-style Blue */
+            --gray-light: #F6F6F6;
+            --gray-med: #EEEEEE;
+            --font-main: 'Kumbh Sans', sans-serif;
+            --font-body: 'Spline Sans', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: var(--font-body);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem;
+            line-height: 1.5;
+        }
+
+        /* Navigation / Header */
+        header {
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+
+        .logo {
+            font-family: var(--font-main);
+            font-weight: 800;
+            font-size: 1.5rem;
+            letter-spacing: -1px;
+        }
+
+        /* Timer Section */
+        .timer-container {
+            text-align: center;
+            width: 100%;
+            max-width: 500px;
+            padding: 3rem;
+            background: var(--bg);
+            border: 1px solid var(--gray-med);
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            margin-bottom: 3rem;
+        }
+
+        .timer-display {
+            font-family: var(--font-main);
+            font-size: 6rem;
+            font-weight: 700;
+            margin: 1rem 0;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .controls button {
+            background: var(--text);
+            color: white;
+            border: none;
+            padding: 12px 32px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.1s ease, opacity 0.2s;
+        }
+
+        .controls button:hover {
+            opacity: 0.85;
+        }
+
+        .controls button:active {
+            transform: scale(0.95);
+        }
+
+        .mode-switcher {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .mode-btn {
+            background: var(--gray-light);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-family: var(--font-body);
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .mode-btn.active {
+            background: var(--text);
+            color: white;
+        }
+
+        /* Task List Section */
+        .tasks-container {
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .tasks-container h2 {
+            font-family: var(--font-main);
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .task-input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+
+        input[type="text"] {
+            flex-grow: 1;
+            padding: 12px;
+            border: 1px solid var(--gray-med);
+            border-radius: 8px;
+            font-family: var(--font-body);
+        }
+
+        #add-task {
+            background: var(--gray-light);
+            border: none;
+            padding: 0 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .task-item {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            border-bottom: 1px solid var(--gray-light);
+            transition: all 0.3s ease;
+        }
+
+        .task-item input[type="checkbox"] {
+            margin-right: 12px;
+            width: 18px;
+            height: 18px;
+            accent-color: var(--text);
+        }
+
+        /* Footer */
+        footer {
+            margin-top: auto;
+            padding-top: 5rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #666;
+            max-width: 600px;
+        }
+
+        .story-link {
+            color: var(--text);
+            text-decoration: underline;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .timer-display { font-size: 4.5rem; }
+            body { padding: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">studybeacon</div>
+    </header>
+
+    <main class="timer-container">
+        <div class="mode-switcher">
+            <button class="mode-btn active" onclick="setTimer(25)">Focus</button>
+            <button class="mode-btn" onclick="setTimer(5)">Short Break</button>
+            <button class="mode-btn" onclick="setTimer(15)">Long Break</button>
+        </div>
+        
+        <div class="timer-display" id="time">25:00</div>
+        
+        <div class="controls">
+            <button id="start-btn">Start</button>
+        </div>
+    </main>
+
+    <section class="tasks-container">
+        <h2>Tasks</h2>
+        <div class="task-input-group">
+            <input type="text" id="task-input" placeholder="What are you working on?">
+            <button id="add-task">+</button>
+        </div>
+        <div id="task-list">
+            </div>
+    </section>
+
+    <footer>
+        <p>Made by students at <strong>Washingtonville High School</strong></p>
+        <p style="margin-top: 5px; opacity: 0.7;">This project is independently built by NHS members and is unaffiliated with the school district.</p>
+        <p style="margin-top: 15px;">Supporting student innovation & focus. <span class="story-link">Our Story</span></p>
+    </footer>
+
+    <script>
+        // Timer Logic
+        let timeLeft = 25 * 60;
+        let timerId = null;
+        const display = document.getElementById('time');
+        const startBtn = document.getElementById('start-btn');
+
+        function updateDisplay() {
+            let mins = Math.floor(timeLeft / 60);
+            let secs = timeLeft % 60;
+            display.textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        function setTimer(minutes) {
+            clearInterval(timerId);
+            timerId = null;
+            timeLeft = minutes * 60;
+            startBtn.textContent = "Start";
+            updateDisplay();
+            
+            // UI Toggle for buttons
+            document.querySelectorAll('.mode-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if(btn.textContent.toLowerCase().includes(minutes === 25 ? 'focus' : 'break')) {
+                    // Simpler logic for this demo
+                }
+            });
+        }
+
+        startBtn.addEventListener('click', () => {
+            if (timerId) {
+                clearInterval(timerId);
+                timerId = null;
+                startBtn.textContent = "Start";
+            } else {
+                startBtn.textContent = "Pause";
+                timerId = setInterval(() => {
+                    timeLeft--;
+                    updateDisplay();
+                    if (timeLeft <= 0) {
+                        clearInterval(timerId);
+                        alert("Time's up! Take a breather.");
+                    }
+                }, 1000);
+            }
+        });
+
+        // Task List Logic
+        const taskInput = document.getElementById('task-input');
+        const addTaskBtn = document.getElementById('add-task');
+        const taskList = document.getElementById('task-list');
+
+        function addTask() {
+            if (taskInput.value.trim() === "") return;
+            
+            const div = document.createElement('div');
+            div.className = 'task-item';
+            div.innerHTML = `
+                <input type="checkbox">
+                <span>${taskInput.value}</span>
+            `;
+            taskList.appendChild(div);
+            taskInput.value = "";
+        }
+
+        addTaskBtn.addEventListener('click', addTask);
+        taskInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') addTask();
+        });
+    </script>
+</body>
+</html>
