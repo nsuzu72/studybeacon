@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Studybeacon | Focus & Productivity</title>
+    <link rel="icon" type="image/png" href="public/ourfavicon1.png">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,18 +14,14 @@
         :root {
             --bg: #ffffff;
             --text: #000000;
-            --accent: #276EF1; /* Uber-style Blue */
+            --accent: #276EF1; 
             --gray-light: #F6F6F6;
             --gray-med: #EEEEEE;
             --font-main: 'Kumbh Sans', sans-serif;
             --font-body: 'Spline Sans', sans-serif;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             background-color: var(--bg);
@@ -35,24 +32,43 @@
             align-items: center;
             min-height: 100vh;
             padding: 2rem;
-            line-height: 1.5;
         }
 
-        /* Navigation / Header */
         header {
             width: 100%;
-            max-width: 800px;
+            max-width: 500px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 4rem;
+            margin-bottom: 2rem;
         }
 
-        .logo {
-            font-family: var(--font-main);
-            font-weight: 800;
-            font-size: 1.5rem;
-            letter-spacing: -1px;
+        .logo { font-family: var(--font-main); font-weight: 800; font-size: 1.5rem; letter-spacing: -1px; }
+
+        /* Settings Panel */
+        #settings-panel {
+            width: 100%;
+            max-width: 500px;
+            background: var(--gray-light);
+            border-radius: 16px;
+            padding: 0;
+            margin-bottom: 2rem;
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.3s ease-out, padding 0.3s ease;
+        }
+
+        #settings-panel.open { max-height: 200px; padding: 1.5rem; border: 1px solid var(--gray-med); }
+
+        .settings-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        
+        .setting-item label { font-size: 0.8rem; font-weight: 600; display: block; margin-bottom: 5px; }
+        
+        .setting-item input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid var(--gray-med);
+            border-radius: 6px;
         }
 
         /* Timer Section */
@@ -60,149 +76,76 @@
             text-align: center;
             width: 100%;
             max-width: 500px;
-            padding: 3rem;
-            background: var(--bg);
+            padding: 3rem 1rem;
             border: 1px solid var(--gray-med);
             border-radius: 24px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
             margin-bottom: 3rem;
         }
 
-        .timer-display {
-            font-family: var(--font-main);
-            font-size: 6rem;
-            font-weight: 700;
-            margin: 1rem 0;
-            font-variant-numeric: tabular-nums;
-        }
-
-        .controls button {
-            background: var(--text);
-            color: white;
-            border: none;
-            padding: 12px 32px;
-            font-size: 1rem;
-            font-weight: 600;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: transform 0.1s ease, opacity 0.2s;
-        }
-
-        .controls button:hover {
-            opacity: 0.85;
-        }
-
-        .controls button:active {
-            transform: scale(0.95);
-        }
-
-        .mode-switcher {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            margin-bottom: 2rem;
-        }
+        .timer-display { font-family: var(--font-main); font-size: 6rem; font-weight: 700; margin: 1rem 0; }
 
         .mode-btn {
             background: var(--gray-light);
             border: none;
             padding: 8px 16px;
             border-radius: 20px;
+            cursor: pointer;
             font-family: var(--font-body);
             font-weight: 500;
-            cursor: pointer;
+            transition: 0.2s;
         }
 
-        .mode-btn.active {
+        .mode-btn.active { background: var(--text); color: white; }
+
+        .controls button {
             background: var(--text);
             color: white;
-        }
-
-        /* Task List Section */
-        .tasks-container {
-            width: 100%;
-            max-width: 500px;
-        }
-
-        .tasks-container h2 {
-            font-family: var(--font-main);
-            font-size: 1.25rem;
-            margin-bottom: 1rem;
-        }
-
-        .task-input-group {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 1rem;
-        }
-
-        input[type="text"] {
-            flex-grow: 1;
-            padding: 12px;
-            border: 1px solid var(--gray-med);
-            border-radius: 8px;
-            font-family: var(--font-body);
-        }
-
-        #add-task {
-            background: var(--gray-light);
             border: none;
-            padding: 0 15px;
-            border-radius: 8px;
-            cursor: pointer;
+            padding: 14px 40px;
+            font-size: 1.1rem;
             font-weight: 600;
-        }
-
-        .task-item {
-            display: flex;
-            align-items: center;
-            padding: 12px;
-            border-bottom: 1px solid var(--gray-light);
-            transition: all 0.3s ease;
-        }
-
-        .task-item input[type="checkbox"] {
-            margin-right: 12px;
-            width: 18px;
-            height: 18px;
-            accent-color: var(--text);
-        }
-
-        /* Footer */
-        footer {
-            margin-top: auto;
-            padding-top: 5rem;
-            text-align: center;
-            font-size: 0.85rem;
-            color: #666;
-            max-width: 600px;
-        }
-
-        .story-link {
-            color: var(--text);
-            text-decoration: underline;
-            font-weight: 600;
+            border-radius: 12px;
             cursor: pointer;
         }
 
-        /* Responsive */
-        @media (max-width: 480px) {
-            .timer-display { font-size: 4.5rem; }
-            body { padding: 1rem; }
-        }
+        /* Task List */
+        .tasks-container { width: 100%; max-width: 500px; }
+        .task-input-group { display: flex; gap: 10px; margin: 1.5rem 0; }
+        input[type="text"] { flex-grow: 1; padding: 12px; border: 1px solid var(--gray-med); border-radius: 8px; }
+        .task-item { display: flex; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--gray-light); }
+        
+        footer { margin-top: auto; padding: 4rem 0 2rem; text-align: center; font-size: 0.8rem; color: #666; line-height: 1.6; }
+
+        .icon-btn { background: none; border: none; cursor: pointer; font-size: 1.2rem; }
     </style>
 </head>
 <body>
 
+    <audio id="start-snd" src="public/startsound.mp3" preload="auto"></audio>
+    <audio id="stop-snd" src="public/stopsound.mp3" preload="auto"></audio>
+
     <header>
         <div class="logo">studybeacon</div>
+        <button class="icon-btn" onclick="toggleSettings()" title="Settings">⚙️</button>
     </header>
 
+    <div id="settings-panel">
+        <div class="settings-grid">
+            <div class="setting-item">
+                <label>Focus (mins)</label>
+                <input type="number" id="focus-input" value="25">
+            </div>
+            <div class="setting-item">
+                <label>Break (mins)</label>
+                <input type="number" id="break-input" value="5">
+            </div>
+        </div>
+    </div>
+
     <main class="timer-container">
-        <div class="mode-switcher">
-            <button class="mode-btn active" onclick="setTimer(25)">Focus</button>
-            <button class="mode-btn" onclick="setTimer(5)">Short Break</button>
-            <button class="mode-btn" onclick="setTimer(15)">Long Break</button>
+        <div class="mode-switcher" style="margin-bottom: 2rem; display: flex; gap: 10px; justify-content: center;">
+            <button id="focus-mode" class="mode-btn active" onclick="switchMode('focus')">Focus</button>
+            <button id="break-mode" class="mode-btn" onclick="switchMode('break')">Break</button>
         </div>
         
         <div class="timer-display" id="time">25:00</div>
@@ -213,48 +156,60 @@
     </main>
 
     <section class="tasks-container">
-        <h2>Tasks</h2>
+        <h3 style="font-family: var(--font-main);">Tasks</h3>
         <div class="task-input-group">
-            <input type="text" id="task-input" placeholder="What are you working on?">
-            <button id="add-task">+</button>
+            <input type="text" id="task-input" placeholder="What's next?">
+            <button id="add-task" class="mode-btn">+</button>
         </div>
-        <div id="task-list">
-            </div>
+        <div id="task-list"></div>
     </section>
 
     <footer>
         <p>Made by students at <strong>Washingtonville High School</strong></p>
-        <p style="margin-top: 5px; opacity: 0.7;">This project is independently built by NHS members and is unaffiliated with the school district.</p>
-        <p style="margin-top: 15px;">Supporting student innovation & focus. <span class="story-link">Our Story</span></p>
+        <p style="opacity: 0.7;">Independently built by NHS members. Unaffiliated with the school district.</p>
     </footer>
 
     <script>
-        // Timer Logic
         let timeLeft = 25 * 60;
         let timerId = null;
+        let currentMode = 'focus';
+
         const display = document.getElementById('time');
         const startBtn = document.getElementById('start-btn');
+        const startSnd = document.getElementById('start-snd');
+        const stopSnd = document.getElementById('stop-snd');
+
+        function toggleSettings() {
+            document.getElementById('settings-panel').classList.toggle('open');
+        }
+
+        function playSound(sound) {
+            sound.currentTime = 0;
+            sound.play().catch(e => console.log("Audio playback blocked"));
+        }
+
+        function switchMode(mode) {
+            currentMode = mode;
+            clearInterval(timerId);
+            timerId = null;
+            startBtn.textContent = "Start";
+            
+            const mins = mode === 'focus' ? 
+                document.getElementById('focus-input').value : 
+                document.getElementById('break-input').value;
+            
+            timeLeft = mins * 60;
+            updateDisplay();
+
+            document.getElementById('focus-mode').classList.toggle('active', mode === 'focus');
+            document.getElementById('break-mode').classList.toggle('active', mode === 'break');
+        }
 
         function updateDisplay() {
             let mins = Math.floor(timeLeft / 60);
             let secs = timeLeft % 60;
             display.textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-        }
-
-        function setTimer(minutes) {
-            clearInterval(timerId);
-            timerId = null;
-            timeLeft = minutes * 60;
-            startBtn.textContent = "Start";
-            updateDisplay();
-            
-            // UI Toggle for buttons
-            document.querySelectorAll('.mode-btn').forEach(btn => {
-                btn.classList.remove('active');
-                if(btn.textContent.toLowerCase().includes(minutes === 25 ? 'focus' : 'break')) {
-                    // Simpler logic for this demo
-                }
-            });
+            document.title = `${display.textContent} - Studybeacon`;
         }
 
         startBtn.addEventListener('click', () => {
@@ -262,40 +217,34 @@
                 clearInterval(timerId);
                 timerId = null;
                 startBtn.textContent = "Start";
+                playSound(stopSnd);
             } else {
                 startBtn.textContent = "Pause";
+                playSound(startSnd);
                 timerId = setInterval(() => {
                     timeLeft--;
                     updateDisplay();
                     if (timeLeft <= 0) {
                         clearInterval(timerId);
-                        alert("Time's up! Take a breather.");
+                        playSound(stopSnd);
+                        alert("Session complete!");
+                        startBtn.textContent = "Start";
                     }
                 }, 1000);
             }
         });
 
-        // Task List Logic
+        // Task List
         const taskInput = document.getElementById('task-input');
-        const addTaskBtn = document.getElementById('add-task');
         const taskList = document.getElementById('task-list');
 
-        function addTask() {
+        document.getElementById('add-task').addEventListener('click', () => {
             if (taskInput.value.trim() === "") return;
-            
             const div = document.createElement('div');
             div.className = 'task-item';
-            div.innerHTML = `
-                <input type="checkbox">
-                <span>${taskInput.value}</span>
-            `;
+            div.innerHTML = `<input type="checkbox" style="margin-right:10px;"> <span>${taskInput.value}</span>`;
             taskList.appendChild(div);
             taskInput.value = "";
-        }
-
-        addTaskBtn.addEventListener('click', addTask);
-        taskInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') addTask();
         });
     </script>
 </body>
