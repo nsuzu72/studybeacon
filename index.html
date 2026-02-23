@@ -124,10 +124,14 @@
     <audio id="start-snd" src="public/startsound.mp3" preload="auto"></audio>
     <audio id="stop-snd" src="public/stopsound.mp3" preload="auto"></audio>
 
-    <header>
-        <div class="logo">studybeacon</div>
-        <button class="icon-btn" onclick="toggleSettings()" title="Settings">⚙️</button>
-    </header>
+<header>
+    <div class="logo">studybeacon</div>
+    <div style="display: flex; gap: 15px; align-items: center;">
+        <a class="fr-widget" data-type="pay" href="https://fnd.us/f2gt9f/pay" data-theme="light">Donate</a>
+        
+        <button class="icon-btn" onclick="toggleSettings()" title="Settings" style="font-size: 1.4rem;">⚙️</button>
+    </div>
+</header>
 
     <div id="settings-panel">
         <div class="settings-grid">
@@ -234,6 +238,8 @@
             }
         });
 
+        
+
         // Task List
         const taskInput = document.getElementById('task-input');
         const taskList = document.getElementById('task-list');
@@ -247,5 +253,6 @@
             taskInput.value = "";
         });
     </script>
+    <script>(function() { var d = document, fr = d.createElement('script'); fr.type = 'text/javascript'; fr.async = true; fr.src = 'https://static.fundrazr.com/widgets/loader.js'; var s = d.getElementsByTagName('script')[0]; s.parentNode.insertBefore(fr, s);})();</script>
 </body>
 </html>
