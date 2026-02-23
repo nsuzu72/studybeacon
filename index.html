@@ -1,290 +1,307 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Studybeacon | Focus & Productivity</title>
-    <link rel="icon" type="image/png" href="public/ourfavicon1.png">
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100..900&family=Spline+Sans:wght@300..700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        :root {
-            --bg: #ffffff;
-            --text: #000000;
-            --accent: #276EF1; 
-            --gray-light: #F6F6F6;
-            --gray-med: #EEEEEE;
-            --font-main: 'Kumbh Sans', sans-serif;
-            --font-body: 'Spline Sans', sans-serif;
-        }
+<title>StudyBeacon – Free Pomodoro Timer & Study Productivity Tool</title>
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+<meta name="description" content="StudyBeacon is a free online Pomodoro timer and task manager built for students. Boost focus, manage tasks, and stay productive with a clean, distraction-free study timer.">
 
-        body {
-            background-color: var(--bg);
-            color: var(--text);
-            font-family: var(--font-body);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            padding: 2rem;
-        }
+<meta name="keywords" content="pomodoro timer, study timer, focus timer, free pomodoro timer, student productivity, online study timer, task manager for students">
 
-        header {
-            width: 100%;
-            max-width: 500px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-        }
+<meta name="author" content="StudyBeacon Team">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://studybeacon.xyz/">
 
-        .logo { font-family: var(--font-main); font-weight: 800; font-size: 1.5rem; letter-spacing: -1px; }
+<!-- Open Graph -->
+<meta property="og:title" content="StudyBeacon – Free Pomodoro Timer for Students">
+<meta property="og:description" content="Minimal, powerful Pomodoro timer and task manager built for focused study sessions.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://studybeacon.xyz/">
+<meta property="og:image" content="https://studybeacon.xyz/public/og-image.jpg">
 
-        /* Settings Panel */
-        #settings-panel {
-            width: 100%;
-            max-width: 500px;
-            background: var(--gray-light);
-            border-radius: 16px;
-            padding: 0;
-            margin-bottom: 2rem;
-            overflow: hidden;
-            max-height: 0;
-            transition: max-height 0.3s ease-out, padding 0.3s ease;
-        }
+<!-- Twitter -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="StudyBeacon – Free Pomodoro Timer">
+<meta name="twitter:description" content="Boost focus with a clean online Pomodoro timer built for students.">
+<meta name="twitter:image" content="https://studybeacon.xyz/public/og-image.jpg">
 
-        #settings-panel.open { max-height: 200px; padding: 1.5rem; border: 1px solid var(--gray-med); }
+<link rel="icon" type="image/png" href="public/ourfavicon1.png">
 
-        .settings-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        
-        .setting-item label { font-size: 0.8rem; font-weight: 600; display: block; margin-bottom: 5px; }
-        
-        .setting-item input {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid var(--gray-med);
-            border-radius: 6px;
-        }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100..900&family=Spline+Sans:wght@300..700&display=swap" rel="stylesheet">
 
-        /* Timer Section */
-        .timer-container {
-            text-align: center;
-            width: 100%;
-            max-width: 500px;
-            padding: 3rem 1rem;
-            border: 1px solid var(--gray-med);
-            border-radius: 24px;
-            margin-bottom: 3rem;
-        }
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "StudyBeacon",
+  "url": "https://studybeacon.xyz",
+  "applicationCategory": "EducationalApplication",
+  "operatingSystem": "All",
+  "description": "A free online Pomodoro timer and task manager built for students to improve focus and productivity.",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
 
-        .timer-display { font-family: var(--font-main); font-size: 6rem; font-weight: 700; margin: 1rem 0; }
+<style>
+:root {
+    --bg: #ffffff;
+    --text: #000000;
+    --accent: #276EF1;
+    --gray-light: #F6F6F6;
+    --gray-med: #EEEEEE;
+    --font-main: 'Kumbh Sans', sans-serif;
+    --font-body: 'Spline Sans', sans-serif;
+}
 
-        .mode-btn {
-            background: var(--gray-light);
-            border: none;
-            padding: 8px 16px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-family: var(--font-body);
-            font-weight: 500;
-            transition: 0.2s;
-        }
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-        /* Styling the FundRazr Widget to look sleek */
-        .fr-widget {
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 2rem;
+}
 
-            font-family: var(--font-body) !important;
-    
-            text-transform: uppercase;
-    
-            font-size: 0.75rem !important;
-    
-            letter-spacing: 1px;
-    
-            font-weight: 700 !important;
-    
-            color: var(--text) !important;
-    
-            text-decoration: none;
-    
-            border: 1px solid var(--text);
-    
-            padding: 6px 12px;
-    
-            border-radius: 6px;
-    
-            transition: all 0.2s ease;
-        }
+header {
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
 
+.logo {
+    font-family: var(--font-main);
+    font-weight: 800;
+    font-size: 1.5rem;
+    letter-spacing: -1px;
+}
 
-        .fr-widget:hover {
-            background: var(--text);
-            color: #fff !important;
-        }
+#settings-panel {
+    width: 100%;
+    max-width: 500px;
+    background: var(--gray-light);
+    border-radius: 16px;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.3s ease-out, padding 0.3s ease;
+}
 
-        .mode-btn.active { background: var(--text); color: white; }
+#settings-panel.open {
+    max-height: 200px;
+    padding: 1.5rem;
+    border: 1px solid var(--gray-med);
+}
 
-        .controls button {
-            background: var(--text);
-            color: white;
-            border: none;
-            padding: 14px 40px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            border-radius: 12px;
-            cursor: pointer;
-        }
+.settings-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
 
-        /* Task List */
-        .tasks-container { width: 100%; max-width: 500px; }
-        .task-input-group { display: flex; gap: 10px; margin: 1.5rem 0; }
-        input[type="text"] { flex-grow: 1; padding: 12px; border: 1px solid var(--gray-med); border-radius: 8px; }
-        .task-item { display: flex; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--gray-light); }
-        
-        footer { margin-top: auto; padding: 4rem 0 2rem; text-align: center; font-size: 0.8rem; color: #666; line-height: 1.6; }
+.setting-item label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 5px;
+}
 
-        .icon-btn { background: none; border: none; cursor: pointer; font-size: 1.2rem; }
-    </style>
+.setting-item input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid var(--gray-med);
+    border-radius: 6px;
+}
+
+.timer-container {
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+    padding: 3rem 1rem;
+    border: 1px solid var(--gray-med);
+    border-radius: 24px;
+    margin-bottom: 3rem;
+}
+
+.timer-display {
+    font-family: var(--font-main);
+    font-size: 6rem;
+    font-weight: 700;
+    margin: 1rem 0;
+}
+
+.mode-btn {
+    background: var(--gray-light);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-weight: 500;
+}
+
+.mode-btn.active {
+    background: var(--text);
+    color: white;
+}
+
+.controls button {
+    background: var(--text);
+    color: white;
+    border: none;
+    padding: 14px 40px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.tasks-container {
+    width: 100%;
+    max-width: 500px;
+}
+
+.task-input-group {
+    display: flex;
+    gap: 10px;
+    margin: 1.5rem 0;
+}
+
+input[type="text"] {
+    flex-grow: 1;
+    padding: 12px;
+    border: 1px solid var(--gray-med);
+    border-radius: 8px;
+}
+
+.task-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--gray-light);
+}
+
+footer {
+    margin-top: auto;
+    padding: 4rem 0 2rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: #666;
+    line-height: 1.6;
+}
+</style>
 </head>
+
 <body>
 
-    <audio id="start-snd" src="public/startsound.mp3" preload="auto"></audio>
-    <audio id="stop-snd" src="public/stopsound.mp3" preload="auto"></audio>
+<audio id="start-snd" src="public/startsound.mp3" preload="auto"></audio>
+<audio id="stop-snd" src="public/stopsound.mp3" preload="auto"></audio>
 
 <header>
-    <div class="logo">studybeacon</div>
-    <div style="display: flex; gap: 15px; align-items: center;">
-        <a class="fr-widget" data-type="pay" href="https://fnd.us/f2gt9f/pay" data-theme="light">Donate</a>
-        
-        <button class="icon-btn" onclick="toggleSettings()" title="Settings" style="font-size: 1.4rem;">⚙️</button>
-    </div>
+    <h1 class="logo">StudyBeacon – Pomodoro Study Timer</h1>
 </header>
 
-    <div id="settings-panel">
-        <div class="settings-grid">
-            <div class="setting-item">
-                <label>Focus (mins)</label>
-                <input type="number" id="focus-input" value="25">
-            </div>
-            <div class="setting-item">
-                <label>Break (mins)</label>
-                <input type="number" id="break-input" value="5">
-            </div>
-        </div>
-    </div>
-
-    <main class="timer-container">
-        <div class="mode-switcher" style="margin-bottom: 2rem; display: flex; gap: 10px; justify-content: center;">
+<main class="timer-container">
+    <section>
+        <h2 style="display:none;">Pomodoro Timer</h2>
+        <div class="mode-switcher" style="margin-bottom:2rem;display:flex;gap:10px;justify-content:center;">
             <button id="focus-mode" class="mode-btn active" onclick="switchMode('focus')">Focus</button>
             <button id="break-mode" class="mode-btn" onclick="switchMode('break')">Break</button>
         </div>
-        
+
         <div class="timer-display" id="time">25:00</div>
-        
+
         <div class="controls">
             <button id="start-btn">Start</button>
         </div>
-    </main>
-
-    <section class="tasks-container">
-        <h3 style="font-family: var(--font-main);">Tasks</h3>
-        <div class="task-input-group">
-            <input type="text" id="task-input" placeholder="What's next?">
-            <button id="add-task" class="mode-btn">+</button>
-        </div>
-        <div id="task-list"></div>
     </section>
+</main>
 
-    <footer>
-        <p>Made by students at <strong>Washingtonville High School</strong></p>
-        <p style="opacity: 0.7;">Independently built by NHS members. Unaffiliated with the school district.</p>
-    </footer>
+<section class="tasks-container">
+    <h2>Task Manager</h2>
+    <div class="task-input-group">
+        <input type="text" id="task-input" placeholder="What's next?">
+        <button id="add-task" class="mode-btn">+</button>
+    </div>
+    <div id="task-list"></div>
+</section>
 
-    <script>
-        let timeLeft = 25 * 60;
-        let timerId = null;
-        let currentMode = 'focus';
+<section style="max-width:700px;margin-top:4rem;line-height:1.6;font-size:0.95rem;">
+    <h2>What Is the Pomodoro Technique?</h2>
+    <p>The Pomodoro Technique is a time management method using focused 25-minute study sessions followed by short breaks. StudyBeacon provides a free, distraction-free online Pomodoro timer built specifically for students.</p>
 
-        const display = document.getElementById('time');
-        const startBtn = document.getElementById('start-btn');
-        const startSnd = document.getElementById('start-snd');
-        const stopSnd = document.getElementById('stop-snd');
+    <h2>Why Use a Study Timer?</h2>
+    <p>Using a structured focus timer improves productivity, reduces procrastination, and helps students retain information more effectively. StudyBeacon combines a Pomodoro timer with a lightweight task manager to keep study sessions organized.</p>
+</section>
 
-        function toggleSettings() {
-            document.getElementById('settings-panel').classList.toggle('open');
-        }
+<footer>
+    <p>Made by students at Washingtonville High School</p>
+    <p style="opacity:0.7;">Independently built by NHS members. Unaffiliated with the school district.</p>
+</footer>
 
-        function playSound(sound) {
-            sound.currentTime = 0;
-            sound.play().catch(e => console.log("Audio playback blocked"));
-        }
+<script>
+let timeLeft = 25 * 60;
+let timerId = null;
+let currentMode = 'focus';
 
-        function switchMode(mode) {
-            currentMode = mode;
-            clearInterval(timerId);
-            timerId = null;
-            startBtn.textContent = "Start";
-            
-            const mins = mode === 'focus' ? 
-                document.getElementById('focus-input').value : 
-                document.getElementById('break-input').value;
-            
-            timeLeft = mins * 60;
+const display = document.getElementById('time');
+const startBtn = document.getElementById('start-btn');
+
+function switchMode(mode) {
+    currentMode = mode;
+    clearInterval(timerId);
+    timerId = null;
+    startBtn.textContent = "Start";
+
+    const mins = mode === 'focus' ? 25 : 5;
+    timeLeft = mins * 60;
+    updateDisplay();
+
+    document.getElementById('focus-mode').classList.toggle('active', mode === 'focus');
+    document.getElementById('break-mode').classList.toggle('active', mode === 'break');
+}
+
+function updateDisplay() {
+    let mins = Math.floor(timeLeft / 60);
+    let secs = timeLeft % 60;
+    display.textContent = 
+        `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    document.title = `${display.textContent} | StudyBeacon Pomodoro Timer`;
+}
+
+startBtn.addEventListener('click', () => {
+    if (timerId) {
+        clearInterval(timerId);
+        timerId = null;
+        startBtn.textContent = "Start";
+    } else {
+        startBtn.textContent = "Pause";
+        timerId = setInterval(() => {
+            timeLeft--;
             updateDisplay();
-
-            document.getElementById('focus-mode').classList.toggle('active', mode === 'focus');
-            document.getElementById('break-mode').classList.toggle('active', mode === 'break');
-        }
-
-        function updateDisplay() {
-            let mins = Math.floor(timeLeft / 60);
-            let secs = timeLeft % 60;
-            display.textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-            document.title = `${display.textContent} - Studybeacon`;
-        }
-
-        startBtn.addEventListener('click', () => {
-            if (timerId) {
+            if (timeLeft <= 0) {
                 clearInterval(timerId);
-                timerId = null;
+                alert("Session complete!");
                 startBtn.textContent = "Start";
-                playSound(stopSnd);
-            } else {
-                startBtn.textContent = "Pause";
-                playSound(startSnd);
-                timerId = setInterval(() => {
-                    timeLeft--;
-                    updateDisplay();
-                    if (timeLeft <= 0) {
-                        clearInterval(timerId);
-                        playSound(stopSnd);
-                        alert("Session complete!");
-                        startBtn.textContent = "Start";
-                    }
-                }, 1000);
             }
-        });
+        }, 1000);
+    }
+});
+</script>
 
-        
-
-        // Task List
-        const taskInput = document.getElementById('task-input');
-        const taskList = document.getElementById('task-list');
-
-        document.getElementById('add-task').addEventListener('click', () => {
-            if (taskInput.value.trim() === "") return;
-            const div = document.createElement('div');
-            div.className = 'task-item';
-            div.innerHTML = `<input type="checkbox" style="margin-right:10px;"> <span>${taskInput.value}</span>`;
-            taskList.appendChild(div);
-            taskInput.value = "";
-        });
-    </script>
-    <script>(function() { var d = document, fr = d.createElement('script'); fr.type = 'text/javascript'; fr.async = true; fr.src = 'https://static.fundrazr.com/widgets/loader.js'; var s = d.getElementsByTagName('script')[0]; s.parentNode.insertBefore(fr, s);})();</script>
 </body>
 </html>
