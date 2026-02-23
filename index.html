@@ -154,6 +154,25 @@ header {
     font-weight: 500;
 }
 
+  .fr-widget {
+    font-family: var(--font-body) !important;
+    text-transform: uppercase;
+    font-size: 0.75rem !important;
+    letter-spacing: 1px;
+    font-weight: 700 !important;
+    color: var(--text) !important;
+    text-decoration: none;
+    border: 1px solid var(--text);
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.fr-widget:hover {
+    background: var(--text);
+    color: #fff !important;
+}
+
 .mode-btn.active {
     background: var(--text);
     color: white;
@@ -213,6 +232,13 @@ footer {
 
 <header>
     <h1 class="logo">studybeacon – Pomodoro Study Timer</h1>
+
+    <a class="fr-widget"
+       data-type="pay"
+       href="https://fnd.us/f2gt9f/pay"
+       data-theme="light">
+       Donate
+    </a>
 </header>
 
 <main class="timer-container">
@@ -316,6 +342,15 @@ startBtn.addEventListener('click', () => {
     }
 });
 </script>
-
+<script>
+(function() {
+    var d = document, fr = d.createElement('script');
+    fr.type = 'text/javascript';
+    fr.async = true;
+    fr.src = 'https://static.fundrazr.com/widgets/loader.js';
+    var s = d.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(fr, s);
+})();
+</script>
 </body>
 </html>
